@@ -5,19 +5,9 @@ function App() {
   return (
     <div>
       <input type="text" name="add-new-task" placeholder="Add new task" />
-      <TodoItem />
-      <div>
-        <p>Đi học thêm</p>
-      </div>
-      <div>
-        <p>Học võ</p>
-      </div>
-      <div>
-        <p>Học bài</p>
-      </div>
-      <div>
-        <p>Đi chợ</p>
-      </div>
+      <TodoItem name="Đi học thêm" />
+      <TodoItem name="Đi học võ" />
+      <TodoItem name="Làm bài" />
     </div>
   );
 }
