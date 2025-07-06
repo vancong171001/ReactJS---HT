@@ -1,9 +1,11 @@
 import './App.css';
+import TodoItem from './components/TodoItem';
 
 function App() {
   return (
     <div>
       <input type="text" name="add-new-task" placeholder="Add new task" />
+      <TodoItem />
       <div>
         <p>Đi học thêm</p>
       </div>
