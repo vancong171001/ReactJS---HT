@@ -10,6 +10,8 @@ function App() {
     { id: 3, name: 'Làm bài', isImportant: false, isCompleted: true },
   ]);
 
+  const [showSidebar, setShowSidebar] = useState(false);
+
   const handleCompleteCheckboxChange = todoId => {
     const newTodoList = todoList.map(todo => {
       if (todo.id === todoId) {
@@ -18,6 +20,10 @@ function App() {
       return todo;
     });
     setTodoList(newTodoList);
+  };
+
+  const handleTodoItemClick = () => {
+    setShowSidebar(!showSidebar);
   };
 
   const inputRef = useRef();
@@ -33,6 +39,7 @@ function App() {
         isImportant={todo.isImportant}
         isCompleted={todo.isCompleted}
         handleCompleteCheckboxChange={handleCompleteCheckboxChange}
+        handleTodoItemClick={handleTodoItemClick}
       />
     );
   });
@@ -63,7 +70,7 @@ function App() {
         }}
       />
       <div>{todos}</div>
-      <Sidebar />
+      {showSidebar && <Sidebar />}
     </div>
   );
 }
