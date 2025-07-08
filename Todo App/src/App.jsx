@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import './App.css';
 import TodoItem from './components/TodoItem';
 
@@ -9,7 +9,9 @@ function App() {
     { id: 3, name: 'Làm bài' },
   ]);
 
-  console.log({ todoList, setTodoList });
+  const inputRef = useRef();
+
+  console.log({ inputRef });
 
   // const todoList = [
   //   { id: 1, name: 'Đi học thêm' },
@@ -22,9 +24,11 @@ function App() {
   });
 
   console.log(todos);
+
   return (
     <div className="container">
       <input
+        ref={inputRef}
         type="text"
         name="add-new-task"
         placeholder="Add new task"
@@ -37,6 +41,7 @@ function App() {
               ...todoList,
               { id: crypto.randomUUID(), name: value },
             ]);
+            inputRef.current.value = '';
           }
         }}
       />
