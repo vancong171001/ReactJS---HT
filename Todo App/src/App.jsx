@@ -10,7 +10,11 @@ function App() {
     { id: 3, name: 'Làm bài', isImportant: false, isCompleted: true },
   ]);
 
+  const [activeTodoItemId, setActiveTodoItemId] = useState();
+
   const [showSidebar, setShowSidebar] = useState(false);
+
+  const activeTodoItem = todoList.find(todo => todo.id === activeTodoItemId);
 
   const handleCompleteCheckboxChange = todoId => {
     const newTodoList = todoList.map(todo => {
@@ -22,8 +26,9 @@ function App() {
     setTodoList(newTodoList);
   };
 
-  const handleTodoItemClick = () => {
-    setShowSidebar(!showSidebar);
+  const handleTodoItemClick = todoId => {
+    setShowSidebar(true);
+    setActiveTodoItemId(todoId);
   };
 
   const inputRef = useRef();
@@ -70,7 +75,7 @@ function App() {
         }}
       />
       <div>{todos}</div>
-      {showSidebar && <Sidebar />}
+      {showSidebar && <Sidebar todoItem={activeTodoItem} />}
     </div>
   );
 }
