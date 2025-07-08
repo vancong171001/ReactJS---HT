@@ -4,28 +4,37 @@ import TodoItem from './components/TodoItem';
 
 function App() {
   const [todoList, setTodoList] = useState([
-    { id: 1, name: 'Đi học thêm', isImportant: false },
-    { id: 2, name: 'Đi học võ', isImportant: true },
-    { id: 3, name: 'Làm bài', isImportant: false },
+    { id: 1, name: 'Đi học thêm', isImportant: false, isCompleted: false },
+    { id: 2, name: 'Đi học võ', isImportant: true, isCompleted: false },
+    { id: 3, name: 'Làm bài', isImportant: false, isCompleted: true },
   ]);
+
+  const handleCompleteCheckboxChange = todoId => {
+    const newTodoList = todoList.map(todo => {
+      if (todo.id === todoId) {
+        return { ...todo, isCompleted: !todo.isCompleted };
+      }
+      return todo;
+    });
+    setTodoList(newTodoList);
+  };
 
   const inputRef = useRef();
 
-  console.log({ inputRef });
-
-  // const todoList = [
-  //   { id: 1, name: 'Đi học thêm' },
-  //   { id: 2, name: 'Đi học võ' },
-  //   { id: 3, name: 'Làm bài' },
-  // ];
+  console.log({ todoList });
 
   const todos = todoList.map(todo => {
     return (
-      <TodoItem name={todo.name} key={todo.id} isImportant={todo.isImportant} />
+      <TodoItem
+        id={todo.id}
+        name={todo.name}
+        key={todo.id}
+        isImportant={todo.isImportant}
+        isCompleted={todo.isCompleted}
+        handleCompleteCheckboxChange={handleCompleteCheckboxChange}
+      />
     );
   });
-
-  console.log(todos);
 
   return (
     <div className="container">
@@ -41,7 +50,12 @@ function App() {
             console.log(value);
             setTodoList([
               ...todoList,
-              { id: crypto.randomUUID(), name: value },
+              {
+                id: crypto.randomUUID(),
+                name: value,
+                isCompleted: false,
+                isImportant: false,
+              },
             ]);
             inputRef.current.value = '';
           }
