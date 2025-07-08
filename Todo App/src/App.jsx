@@ -4,9 +4,9 @@ import TodoItem from './components/TodoItem';
 
 function App() {
   const [todoList, setTodoList] = useState([
-    { id: 1, name: 'Đi học thêm' },
-    { id: 2, name: 'Đi học võ' },
-    { id: 3, name: 'Làm bài' },
+    { id: 1, name: 'Đi học thêm', isImportant: false },
+    { id: 2, name: 'Đi học võ', isImportant: true },
+    { id: 3, name: 'Làm bài', isImportant: false },
   ]);
 
   const inputRef = useRef();
@@ -20,7 +20,9 @@ function App() {
   // ];
 
   const todos = todoList.map(todo => {
-    return <TodoItem name={todo.name} key={todo.id} />;
+    return (
+      <TodoItem name={todo.name} key={todo.id} isImportant={todo.isImportant} />
+    );
   });
 
   console.log(todos);
