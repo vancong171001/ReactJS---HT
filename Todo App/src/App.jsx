@@ -26,6 +26,16 @@ function App() {
     setTodoList(newTodoList);
   };
 
+  const handleTodoItemChange = newTodo => {
+    const newTodoList = todoList.map(todo => {
+      if (todo.id === newTodo.id) {
+        return newTodo;
+      }
+      return todo;
+    });
+    setTodoList(newTodoList);
+  };
+
   const handleTodoItemClick = todoId => {
     setShowSidebar(true);
     setActiveTodoItemId(todoId);
@@ -75,7 +85,14 @@ function App() {
         }}
       />
       <div>{todos}</div>
-      {showSidebar && <Sidebar todoItem={activeTodoItem} />}
+      {showSidebar && (
+        <Sidebar
+          key={activeTodoItemId}
+          todoItem={activeTodoItem}
+          handleTodoItemChange={handleTodoItemChange}
+          setShowSidebar={setShowSidebar}
+        />
+      )}
     </div>
   );
 }
