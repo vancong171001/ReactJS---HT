@@ -13,6 +13,9 @@ const TodoItem = props => {
           onChange={() => {
             props.handleCompleteCheckboxChange(props.id);
           }}
+          onClick={e => {
+            e.stopPropagation();
+          }}
         />
         <p className="todo-item-text">{props.name}</p>
       </div>
