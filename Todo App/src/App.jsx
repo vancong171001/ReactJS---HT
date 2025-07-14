@@ -11,6 +11,8 @@ function App() {
     { id: 3, name: 'Làm bài', isImportant: false, isCompleted: true },
   ]);
 
+  const [selectedItemId, setSelectedItemId] = useState('all');
+
   const [activeTodoItemId, setActiveTodoItemId] = useState();
 
   const [showSidebar, setShowSidebar] = useState(false);
@@ -62,7 +64,10 @@ function App() {
 
   return (
     <div className="container">
-      <FilterPanel />
+      <FilterPanel
+        selectedItemId={selectedItemId}
+        setSelectedItemId={setSelectedItemId}
+      />
       <div className="main-content">
         <input
           ref={inputRef}

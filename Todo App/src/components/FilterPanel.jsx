@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import './FilterPanel.css';
 
 const FILTER_ITEMS = [
@@ -24,9 +23,7 @@ const FILTER_ITEMS = [
   },
 ];
 
-const FilterPanel = () => {
-  const [selectedItemId, setSelectedItemId] = useState('all');
-
+const FilterPanel = ({ selectedItemId, setSelectedItemId }) => {
   return (
     <div className="filter-panel">
       <input name="search-text" placeholder="Search" />
