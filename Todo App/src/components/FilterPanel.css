@@ -16,3 +16,8 @@
   grid-template-rows: repeat(2, 1fr);
   gap: 5px;
 }
+
+.selected {
+  background-color: #0f548c;
+  color: white;
+}
