@@ -31,6 +31,7 @@ const FilterPanel = ({ selectedItemId, setSelectedItemId }) => {
         {FILTER_ITEMS.map(filtertItem => {
           return (
             <div
+              key={filtertItem.id}
               className={`filter-item ${
                 filtertItem.id === selectedItemId ? 'selected' : ''
               }`}

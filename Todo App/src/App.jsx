@@ -1,14 +1,32 @@
 import { useRef, useState } from 'react';
 import './App.css';
 import TodoItem from './components/TodoItem';
-import Sidebar from './components/Sidebar';
 import FilterPanel from './components/FilterPanel';
+import Sidebar from './components/Sidebar';
 
 function App() {
   const [todoList, setTodoList] = useState([
-    { id: 1, name: 'Đi học thêm', isImportant: false, isCompleted: false },
-    { id: 2, name: 'Đi học võ', isImportant: true, isCompleted: false },
-    { id: 3, name: 'Làm bài', isImportant: false, isCompleted: true },
+    {
+      id: 1,
+      name: 'Đi học thêm',
+      isImportant: false,
+      isCompleted: false,
+      isDeleted: false,
+    },
+    {
+      id: 2,
+      name: 'Đi học võ',
+      isImportant: true,
+      isCompleted: false,
+      isDeleted: false,
+    },
+    {
+      id: 3,
+      name: 'Làm bài',
+      isImportant: false,
+      isCompleted: true,
+      isDeleted: false,
+    },
   ]);
 
   const [selectedItemId, setSelectedItemId] = useState('all');
@@ -48,19 +66,34 @@ function App() {
 
   console.log({ todoList });
 
-  const todos = todoList.map(todo => {
-    return (
-      <TodoItem
-        id={todo.id}
-        name={todo.name}
-        key={todo.id}
-        isImportant={todo.isImportant}
-        isCompleted={todo.isCompleted}
-        handleCompleteCheckboxChange={handleCompleteCheckboxChange}
-        handleTodoItemClick={handleTodoItemClick}
-      />
-    );
-  });
+  const filterdTodos = todoList
+    .filter(todo => {
+      switch (selectedItemId) {
+        case 'all':
+          return true;
+        case 'important':
+          return todo.isImportant;
+        case 'completed':
+          return todo.isCompleted;
+        case 'deleted':
+          return todo.isDeleted;
+        default:
+          return true;
+      }
+    })
+    .map(todo => {
+      return (
+        <TodoItem
+          id={todo.id}
+          name={todo.name}
+          key={todo.id}
+          isImportant={todo.isImportant}
+          isCompleted={todo.isCompleted}
+          handleCompleteCheckboxChange={handleCompleteCheckboxChange}
+          handleTodoItemClick={handleTodoItemClick}
+        />
+      );
+    });
 
   return (
     <div className="container">
@@ -86,13 +119,14 @@ function App() {
                   name: value,
                   isCompleted: false,
                   isImportant: false,
+                  isDeleted: false,
                 },
               ]);
               inputRef.current.value = '';
             }
           }}
         />
-        <div>{todos}</div>
+        <div>{filterdTodos}</div>
         {showSidebar && (
           <Sidebar
             key={activeTodoItemId}
