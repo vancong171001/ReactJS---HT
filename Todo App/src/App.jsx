@@ -7,21 +7,21 @@ import Sidebar from './components/Sidebar';
 function App() {
   const [todoList, setTodoList] = useState([
     {
-      id: 1,
+      id: '1',
       name: 'Đi học thêm',
       isImportant: false,
       isCompleted: false,
       isDeleted: false,
     },
     {
-      id: 2,
+      id: '2',
       name: 'Đi học võ',
       isImportant: true,
       isCompleted: false,
       isDeleted: false,
     },
     {
-      id: 3,
+      id: '3',
       name: 'Làm bài',
       isImportant: false,
       isCompleted: true,
