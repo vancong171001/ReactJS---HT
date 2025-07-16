@@ -1,5 +1,7 @@
 import './FilterPanel.css';
 
+import PropTypes from 'prop-types';
+
 const FILTER_ITEMS = [
   {
     id: 'all',
@@ -23,7 +25,27 @@ const FILTER_ITEMS = [
   },
 ];
 
-const FilterPanel = ({ selectedItemId, setSelectedItemId }) => {
+const FilterPanel = ({ selectedFilterId, setSelectedFilterId, todoList }) => {
+  const countByFilterType = todoList.reduce(
+    (acc, cur) => {
+      let newAcc = { ...acc };
+      if (cur.isCompleted) {
+        newAcc = { ...newAcc, completed: newAcc.completed + 1 };
+      }
+      if (cur.isImportant) {
+        newAcc = { ...newAcc, important: newAcc.important + 1 };
+      }
+      if (cur.isDeleted) {
+        newAcc = { ...newAcc, deleted: newAcc.deleted + 1 };
+      }
+
+      return newAcc;
+    },
+    { all: todoList.length, important: 0, completed: 0, deleted: 0 }
+  );
+
+  console.log({ countByFilterType });
+
   return (
     <div className="filter-panel">
       <input name="search-text" placeholder="Search" />
@@ -33,23 +55,29 @@ const FilterPanel = ({ selectedItemId, setSelectedItemId }) => {
             <div
               key={filtertItem.id}
               className={`filter-item ${
-                filtertItem.id === selectedItemId ? 'selected' : ''
+                filtertItem.id === selectedFilterId ? 'selected' : ''
               }`}
               onClick={() => {
-                setSelectedItemId(filtertItem.id);
+                setSelectedFilterId(filtertItem.id);
               }}
             >
               <div className="filter-name">
                 <img src={filtertItem.iconPath} />
                 <p>{filtertItem.label}</p>
               </div>
-              <p>22</p>
+              <p>{countByFilterType[filtertItem.id]}</p>
             </div>
           );
         })}
       </div>
     </div>
   );
+};
+
+FilterPanel.propTypes = {
+  selectedFilterId: PropTypes.string,
+  setSelectedFilterId: PropTypes.func,
+  todoList: PropTypes.array,
 };
 
 export default FilterPanel;

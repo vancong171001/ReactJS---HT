@@ -22,8 +22,6 @@ export default defineConfig([
         sourceType: 'module',
       },
     },
-    rules: {
-      'no-unused-vars': 'off',
-    },
+    rules: {},
   },
 ]);

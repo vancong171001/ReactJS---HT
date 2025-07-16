@@ -29,7 +29,7 @@ function App() {
     },
   ]);
 
-  const [selectedItemId, setSelectedItemId] = useState('all');
+  const [selectedFilterId, setSelectedFilterId] = useState('all');
 
   const [activeTodoItemId, setActiveTodoItemId] = useState();
 
@@ -68,7 +68,7 @@ function App() {
 
   const filterdTodos = todoList
     .filter(todo => {
-      switch (selectedItemId) {
+      switch (selectedFilterId) {
         case 'all':
           return true;
         case 'important':
@@ -98,8 +98,9 @@ function App() {
   return (
     <div className="container">
       <FilterPanel
-        selectedItemId={selectedItemId}
-        setSelectedItemId={setSelectedItemId}
+        selectedFilterId={selectedFilterId}
+        setSelectedFilterId={setSelectedFilterId}
+        todoList={todoList}
       />
       <div className="main-content">
         <input

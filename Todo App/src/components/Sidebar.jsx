@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './Sidebar.css';
+import PropTypes from 'prop-types';
 
 const Sidebar = props => {
   const data = props.todoItem;
@@ -66,6 +67,16 @@ const Sidebar = props => {
       </div>
     </div>
   );
+};
+
+Sidebar.PropTypes = {
+  setShowSidebar: PropTypes.func,
+  todoItem: {
+    name: PropTypes.string,
+    isImportant: PropTypes.bool,
+    isCompleted: PropTypes.bool,
+  },
+  handleTodoItemChange: PropTypes.func,
 };
 
 export default Sidebar;

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 const TodoItem = props => {
   return (
     <div
@@ -20,6 +21,15 @@ const TodoItem = props => {
       {props.isImportant && <p>⭐</p>}
     </div>
   );
+};
+
+TodoItem.PropTypes = {
+  name: PropTypes.string,
+  id: PropTypes.string,
+  handleTodoItemClick: PropTypes.func,
+  handleCompleteCheckboxChange: PropTypes.func,
+  isCompleted: PropTypes.bool,
+  isImportant: PropTypes.bool,
 };
 
 export default TodoItem;
